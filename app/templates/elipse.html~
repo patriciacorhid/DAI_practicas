@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My first SVG</h1>
+
+<svg height="1000" width="1000">
+  <ellipse cx={{ x }} cy={{ y }} rx="90" ry="50"
+  style="fill:" + {{ fill }} + ";stroke:rgb(0, 0, 0);stroke-width:2" />
+</svg>
+
+</body>
+</html>
