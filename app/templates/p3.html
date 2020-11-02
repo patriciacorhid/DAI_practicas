@@ -54,13 +54,20 @@
 	    </li>
           </ul>
 
-	  <!-- Login -->
+	  <!-- Login Formulario -->
+	  
+	  {% if not session['username'] %}
+	  <!-- Si no hay nadie registrado, muestro formulario -->
 	  <form class="form-inline mt-2" method='POST' action="/login/">
             <input name="username" class="form-control mr-2" type="text" placeholder="Username">
 	    <input name="password" class="form-control mr-2" type="password" placeholder="Password">
             <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Sign in</button>
 	    <a class="btn btn-outline-success  my-2" href="/login/">Sign up</a>
           </form>
+	  {% else %}
+	  <!-- Si hay alguien registrado, botón de salir -->
+	  <a class="btn btn-outline-success  my-2" href="/exit/">Exit</a>
+	  {% endif %}
 	  
         </div>
       </nav>
@@ -69,30 +76,33 @@
     <div class="container-fluid">
   <div class="row">
 
-    <!-- Begin page content -->
+    <!-- Login Message -->
     <main role="main" class="container-fluid col-md-10 col-lg-10" >
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       {% for message in messages %}
       {% if "Invalid" in message %}
+      <!-- Mensaje de error en el login -->
 	<div class="alert alert-danger mt-2" role="alert">
 	    {{ message }}
 	</div>
 	{% else %}
+	<!-- Mensaje de éxito en el login -->
 	<div class="alert alert-success mt-2" role="alert">
 	    {{ message }}
 	</div>
 	{% endif %}
 	{% endfor %}
       {% endif %}
-      {% endwith %}
+	{% endwith %}
 
-      <!-- Dashboard-->
+      <!-- Web content-->
       <h1 class="mt-5">Sticky footer with fixed navbar</h1>
       <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt; .container</code>.</p>
       <p>Back to <a href="../sticky-footer/">the default sticky footer</a> minus the navbar.</p>
     </main>
 
+    <!-- Dashboard-->
         <nav id="Menu" class="col-md-2 col-lg-2 d-md-block sidebar collapse">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">

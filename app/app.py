@@ -189,4 +189,10 @@ def login():
     flash('Invalid username')
 
   return redirect(url_for('p3'))
+
+@app.route('/exit/')
+def exit():
+  session['username'] = ''
+
+  return redirect(url_for('p3'))
       
