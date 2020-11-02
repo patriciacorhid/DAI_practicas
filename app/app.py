@@ -24,7 +24,7 @@ app = Flask(__name__)
 def hello_world():
   return 'Hello, World!'      
 
-#------------------------------- EJERCICIO 1 ----------------------------------
+#------------------------------- EJERCICIO 1: Interfaz para los ejercicios del 2 al 6 de la práctica anterior ----------------------------------
 
 #Ejercicio 2
 @app.route('/burbuja/<v>')
@@ -114,14 +114,14 @@ def func_reg3(v):
 
 #------------------------------- EJERCICIO 2 ----------------------------------
 @app.route('/ejercicio2/')
-def hello():
+def ejercicio2():
     return render_template('ejercicio2.html')
   #------------------------------- EJERCICIO 3 ----------------------------------
 @app.errorhandler(404)
 def page_not_found(e):
   # note that we set the 404 status explicitly
     return render_template('404.html'), 404
-  #------------------------------- EJERCICIO 4 ----------------------------------
+  #------------------------------- EJERCICIO 4 (Subir Nota) ----------------------------------
 @app.route('/svg/')
 def visualize_svg():
    # Figura
@@ -137,11 +137,20 @@ def visualize_svg():
    b = randint(0, 255)
 
    s = "rgb(" + str(r) + "," + str(g) + "," + str(b) + ")"
-   v = s
 
    if n == 0:
-     return render_template('circulo.html', x = str(cx), y = str(cy), f = v)
+     return render_template('circulo.html', x = str(cx), y = str(cy), f = s)
    elif n == 1:
      return render_template('rectangulo.html', x = str(cx), y = str(cy), f = s)
    else:
      return render_template('elipse.html',  x = str(cx), y = str(cy), f = s)
+
+
+#******************************* PRACTICA 3 ********************************
+@app.route('/p3/')
+def p3():
+    return render_template('p3.html')
+
+@app.route('/p1ej1/')
+def p1ej1():
+  return render_template('p1ej1.html')
