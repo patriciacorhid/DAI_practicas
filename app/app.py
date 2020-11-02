@@ -1,6 +1,7 @@
 #./app/app.py
-from flask import Flask
+from flask import Flask, session, request, flash, redirect, url_for
 from flask import render_template
+from pickleshare import *
 
 from ejercicios import burbuja
 from ejercicios import insercion
@@ -19,6 +20,22 @@ import re
 from random import randint 
 
 app = Flask(__name__)
+app.secret_key = 'thesecretprotectsitself'
+
+# Usuarios de Cactus Web (P3) 
+db = PickleShareDB('miBD')
+
+db['Pepe'] = dict()
+db['Pepe']['pass'] = '1234'
+db['Pepe'] = db['Pepe']
+
+db['Maria'] = dict()
+db['Maria']['pass'] = '1111'
+db['Maria'] = db['Maria']
+
+db['David'] = dict()
+db['David']['pass'] = '0000'
+db['David'] = db['David']
           
 @app.route('/')
 def hello_world():
@@ -154,3 +171,22 @@ def p3():
 @app.route('/p1ej1/')
 def p1ej1():
   return render_template('p1ej1.html')
+
+@app.route('/login/',methods=['POST', 'GET'])
+def login():
+  username = request.form['username']
+  password = request.form['password']
+
+  if username in db:
+    if db[username]['pass'] == password:
+      session['username'] = username
+      flash('Welcome ' + username)
+
+    else:
+      flash('Invalid password')
+
+  else:
+    flash('Invalid username')
+
+  return redirect(url_for('p3'))
+      
