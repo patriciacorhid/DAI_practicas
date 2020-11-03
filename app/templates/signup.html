@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sign up</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <h4>Create your account:</h4>
+
+  {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <!-- Mensaje de error en el login -->
+	<div class="alert alert-danger mt-2" role="alert">
+	    {{ message }}
+	</div>
+	{% endfor %}
+      {% endif %}
+	{% endwith %}
+
+  <!-- Formulario de registro -->
+  <div class="container">
+    <form class="form-inline mt-2" method='POST' action="/account_created/">
+      <input name="username" class="form-control mr-2" type="text" placeholder="Username">
+      <input name="password" class="form-control mr-2" type="password" placeholder="Password">
+      <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Accept</button>
+    </form>
+  </div>
+
+</body>
+</html>

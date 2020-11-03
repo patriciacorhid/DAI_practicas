@@ -41,32 +41,32 @@
 		<span class="caret"></span></a>
               <ul class="dropdown-menu">
 		<li><a href="/p1ej1/">Ejercicio 1</a></li>
-		<li><a href="/burbuja/0, -3, 8, 5, 11, 2, 4">Ejercicio 2 - Burbuja</a></li>
-		<li><a href="/insercion/0, -3, 8, 5, 11, 2, 4">Ejercicio 2 - Inserción</a></li>
-		<li><a href="/seleccion/0, -3, 8, 5, 11, 2, 4">Ejercicio 2 - Seleccion</a></li>
-		<li><a href="/criba/200">Ejercicio 3 - Criba</a></li>
-		<li><a href="/fibonacci/9">Ejercicio 4 - Fibonacci</a></li>
-		<li><a href="/parentesis/[[][[]]]">Ejercicio 5 - Parentesis</a></li>
-		<li><a href="/reg1/El agente A preparaba los planes de su misión. Esta noche se encontraría con su archienemigo B y esperabo poder derrotarlo de una vez por todas.">Ejercicio 6-1</a></li>
-		<li><a href="/reg2/Busqué su correo desesperadamente entre aquella larga lista: maria223@gmail.com, pepito_chiquitito@yahoo.es, jose28ramirez@google45.org... Aquí está: lola_la_ola_6544@sss.es">Ejercicio 6-2</a></li>
-		<li><a href="/reg3/ No me acordaba de su cuenta bancaria:1234-1234-5678-5678, 1111-1111-1111-1111,9874 5632 1447 1444. Todos intentos fallidos. Ya era 19-03-2020, necesitaba la cuenta urgentemente">Ejercicio 6-3</a></li>
+		<li><a href="/p1ej2_burbuja/0, -3, 8, 5, 11, 2, 4">Ejercicio 2 - Burbuja</a></li>
+		<li><a href="/p1ej2_insercion/0, -3, 8, 5, 11, 2, 4">Ejercicio 2 - Inserción</a></li>
+		<li><a href="/p1ej2_seleccion/0, -3, 8, 5, 11, 2, 4">Ejercicio 2 - Selección</a></li>
+		<li><a href="/p1ej3/200">Ejercicio 3</a></li>
+		<li><a href="/p1ej4/9">Ejercicio 4</a></li>
+		<li><a href="/p1ej5/[[][[]]]">Ejercicio 5</a></li>
+		<li><a href="/p1ej61/El agente A preparaba los planes de su misión. Esta noche se encontraría con su archienemigo B y esperabo poder derrotarlo de una vez por todas.">Ejercicio 6 - Mayúscula</a></li>
+		<li id="ejercicios"><a href="/p1ej62/Busqué su correo desesperadamente entre aquella larga lista: maria223@gmail.com, pepito_chiquitito@yahoo.es, jose28ramirez@google45.org... Aquí está: lola_la_ola_6544@sss.es">Ejercicio 6 - Correos</a></li>
+		<li id="ejercicios"><a href="/p1ej63/ No me acordaba de su cuenta bancaria:1234-1234-5678-5678, 1111-1111-1111-1111,9874 5632 1447 1444. Todos intentos fallidos. Ya era 19-03-2020, necesitaba la cuenta urgentemente">Ejercicio 6 - Cuentas</a></li>
               </ul>
 	    </li>
           </ul>
 
-	  <!-- Login Formulario -->
+	  <!-- Formulario Login -->
 	  
 	  {% if not session['username'] %}
 	  <!-- Si no hay nadie registrado, muestro formulario -->
 	  <form class="form-inline mt-2" method='POST' action="/login/">
-            <input name="username" class="form-control mr-2" type="text" placeholder="Username">
-	    <input name="password" class="form-control mr-2" type="password" placeholder="Password">
-            <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Sign in</button>
-	    <a class="btn btn-outline-success  my-2" href="/login/">Sign up</a>
+            <input name="username" class="form-control mr-2" type="text" placeholder="Usuario">
+	    <input name="password" class="form-control mr-2" type="password" placeholder="Contraseña">
+            <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Acceder</button>
+	    <a class="btn btn-outline-success  my-2" href="/signup/">Regisrtrarse</a>
           </form>
 	  {% else %}
 	  <!-- Si hay alguien registrado, botón de salir -->
-	  <a class="btn btn-outline-success  my-2" href="/exit/">Exit</a>
+	  <a class="btn btn-outline-success  my-2" href="/exit/">Salir</a>
 	  {% endif %}
 	  
         </div>
@@ -74,14 +74,53 @@
     </header>
 
     <div class="container-fluid">
-  <div class="row">
+      <div class="row">
 
-    <!-- Login Message -->
+    	 <!-- Dashboard-->
+        <nav id="Menu" class="col-md-2 col-lg-2 d-md-block sidebar collapse">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item mr-auto">
+            <a class="nav-link" href="#">
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item mr-auto">
+            <a class="nav-link" href="#">
+              Orders
+            </a>
+          </li>
+          <li class="nav-item mr-auto">
+            <a class="nav-link" href="#">
+              Products
+            </a>
+          </li>
+          <li class="nav-item mr-auto">
+            <a class="nav-link" href="#">
+              Customers
+            </a>
+          </li>
+          <li class="nav-item mr-auto">
+            <a class="nav-link" href="#">
+              Reports
+            </a>
+          </li>
+          <li class="nav-item mr-auto">
+            <a class="nav-link" href="#">
+              Integrations
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Contenido de la web -->
+    <!-- Mensaje de Login -->
     <main role="main" class="container-fluid col-md-10 col-lg-10" >
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       {% for message in messages %}
-      {% if "Invalid" in message %}
+      {% if "invalid" in message %}
       <!-- Mensaje de error en el login -->
 	<div class="alert alert-danger mt-2" role="alert">
 	    {{ message }}
@@ -96,55 +135,20 @@
       {% endif %}
 	{% endwith %}
 
-      <!-- Web content-->
-      <h1 class="mt-5">Sticky footer with fixed navbar</h1>
-      <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt; .container</code>.</p>
-      <p>Back to <a href="../sticky-footer/">the default sticky footer</a> minus the navbar.</p>
+      <!-- Texto de la página -->
+      <h1 class="col-md-10 col-lg-10 mt-5"> Resolución de los ejercicios de la práctica 2</h1>
+      <p class="lead"> Seleccione en el menú de navegación el ejercicio que quiera ver resuelto.</p>
+      <p>{% block title %} {% endblock %}</p>
+      
+      <p>{% block ejercicio %} {% endblock %}</p>
+      
     </main>
-
-    <!-- Dashboard-->
-        <nav id="Menu" class="col-md-2 col-lg-2 d-md-block sidebar collapse">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item mx-auto">
-            <a class="nav-link" href="#">
-              Dashboard
-            </a>
-          </li>
-          <li class="nav-item mx-auto">
-            <a class="nav-link" href="#">
-              Orders
-            </a>
-          </li>
-          <li class="nav-item mx-auto">
-            <a class="nav-link" href="#">
-              Products
-            </a>
-          </li>
-          <li class="nav-item mx-auto">
-            <a class="nav-link" href="#">
-              Customers
-            </a>
-          </li>
-          <li class="nav-item mx-auto">
-            <a class="nav-link" href="#">
-              Reports
-            </a>
-          </li>
-          <li class="nav-item mx-auto">
-            <a class="nav-link" href="#">
-              Integrations
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
 
   </div>
     </div>
 
 
-    <!-- Footer-->
+    <!-- Pie de pagina-->
     <footer class="footer">
       <div class="container">
         <span class="text-muted">Thanks for trusting on us</span>
