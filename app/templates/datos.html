@@ -1,0 +1,31 @@
+{% extends "p3.html" %}
+
+{% block registro %}
+
+  <h4>Datos de {{ user }}:</h4>
+
+  <!-- Formulario de registro -->
+  <div class="container">
+    <form class="form-inline" method='POST' action="/modify/">
+      <p>Nombre de usuario:   </p>
+      <input name="username" class="form-control ml-2 mr-5" type="text" value= {{ user}} >
+      <p>Contraseña:   </p>
+      <input name="password" class="form-control mx-2" type="password" value= {{ pwd }}>
+      <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Guardar</button>
+      <a class="btn btn-outline-success  my-2 mx-sm-2" href="/p3/">Volver a la página principal</a>
+    </form>
+  </div>
+
+  {% endblock %}
+
+{% block intro %}
+{% endblock %}
+  
+{% block title %}
+{% endblock %}
+
+{% block enunciado %}
+{% endblock %}
+
+{% block ejercicio %}
+{% endblock %}

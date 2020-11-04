@@ -19,7 +19,7 @@
       <!-- Navbar -->
       <nav class="navbar navbar-expand-md navbar-dark" id="navbar">
 	<a href="#" class="navbar-left"><img width="80" height="100" src="/static/logo.jpg"></a>
-        <a class="navbar-brand" href="#">Cactus Web</a>
+        <a class="navbar-brand" href="/p3/">Cactus Web</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false">
           <span class="navbar-toggler-icon"></span>		
         </button>
@@ -66,6 +66,7 @@
           </form>
 	  {% else %}
 	  <!-- Si hay alguien registrado, botón de salir -->
+	  <a id="Config" class="btn btn-outline-success  mr-2" href="/datos/">Datos de {{ session['username'] }}</a>
 	  <a class="btn btn-outline-success  my-2" href="/exit/">Salir</a>
 	  {% endif %}
 	  
@@ -120,7 +121,7 @@
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       {% for message in messages %}
-      {% if "invalid" in message %}
+      {% if "inválid" in message %}
       <!-- Mensaje de error en el login -->
 	<div class="alert alert-danger mt-2" role="alert">
 	    {{ message }}
@@ -135,11 +136,20 @@
       {% endif %}
 	{% endwith %}
 
-      <!-- Texto de la página -->
-      <h1 class="col-md-10 col-lg-10 mt-5"> Resolución de los ejercicios de la práctica 2</h1>
+	<!-- Texto de la página -->
+	{% block intro %}
+	<h1 class="col-md-10 col-lg-10 mt-5"> Práctica 3:</h1>
+	<h3> Resolución de los ejercicios de la práctica 2.</h3>
       <p class="lead"> Seleccione en el menú de navegación el ejercicio que quiera ver resuelto.</p>
-      <p>{% block title %} {% endblock %}</p>
-      
+      {% endblock intro %}
+
+      <!-- Espacio reservado para registrarse o mostrar datos de usuario-->
+      <p>{% block registro %} {% endblock %}</p>
+      <!-- Espacio reservado para el título. Ej: Ejercicio 2-->
+      <h4><b>{% block title %} {% endblock %}</b></h4>
+      <!-- Espacio reservado para el enunciado del ejercicio-->
+      <h5><i>{% block enunciado %} {% endblock %}</i></h5>
+      <!-- Espacio reservado para la solucion del ejercicio-->
       <p>{% block ejercicio %} {% endblock %}</p>
       
     </main>
