@@ -81,36 +81,26 @@
         <nav id="Menu" class="col-md-2 col-lg-2 d-md-block sidebar collapse">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
+	  {% if session['username'] %}
+	  <li class="nav-item ml-3">
+            <h6>Últimas páginas visitadas:</h6>
+          </li>
           <li class="nav-item mr-auto">
-            <a class="nav-link" href="#">
-              Dashboard
+            <a class="nav-link active" href={{session['url'][0]}}>
+              {{session['nurl'][0]}}
             </a>
           </li>
           <li class="nav-item mr-auto">
-            <a class="nav-link" href="#">
-              Orders
+            <a class="nav-link active" href={{session['url'][1]}}>
+              {{session['nurl'][1]}}
             </a>
           </li>
           <li class="nav-item mr-auto">
-            <a class="nav-link" href="#">
-              Products
+            <a class="nav-link active" href={{session['url'][2]}}>
+              {{session['nurl'][2]}}
             </a>
           </li>
-          <li class="nav-item mr-auto">
-            <a class="nav-link" href="#">
-              Customers
-            </a>
-          </li>
-          <li class="nav-item mr-auto">
-            <a class="nav-link" href="#">
-              Reports
-            </a>
-          </li>
-          <li class="nav-item mr-auto">
-            <a class="nav-link" href="#">
-              Integrations
-            </a>
-          </li>
+	  {% endif%}
         </ul>
       </div>
     </nav>
@@ -121,7 +111,7 @@
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       {% for message in messages %}
-      {% if "inválid" in message %}
+      {% if "inválid" in message or "Mala suerte" in message %}
       <!-- Mensaje de error en el login -->
 	<div class="alert alert-danger mt-2" role="alert">
 	    {{ message }}
@@ -142,7 +132,7 @@
 	<h3> Resolución de los ejercicios de la práctica 2.</h3>
       <p class="lead"> Seleccione en el menú de navegación el ejercicio que quiera ver resuelto.</p>
       {% endblock intro %}
-
+      
       <!-- Espacio reservado para registrarse o mostrar datos de usuario-->
       <p>{% block registro %} {% endblock %}</p>
       <!-- Espacio reservado para el título. Ej: Ejercicio 2-->

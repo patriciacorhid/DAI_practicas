@@ -1,26 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Ejercicio 1</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% extends "p3.html" %}
 
-  <h4>Adivina el número (del 1 al 100):</h4>
+{% block registro %}
+{% endblock %}
 
-<div class="container">
-  <form action="/action_page.php">
-    <div class="form-group">
-      <label for="numero">Selecciona un número</label>
-      <input type="text" name="n">
-    </div>
-    <button type="submit" class="btn btn-default">Probar</button>
-  </form>
-</div>
+{% block intro %}
+{% endblock %}
+  
+{% block title %}
+{{ title }}
+{% endblock %}
 
-</body>
-</html>
+{% block enunciado %}
+{{ enunciado}}
+{% endblock %}
+
+{% block ejercicio %}
+  <h4>Introduce un número del 1 al 100:</h4>
+
+  <!-- Formulario de registro -->
+  <div class="container">
+    <form class="form-inline mt-2" method='POST' action="/p1ej1/">
+      <input name="num" class="form-control mr-2" type="text">
+      <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Aceptar</button>
+    </form>
+  </div>
+{% endblock %}

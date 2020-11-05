@@ -3,7 +3,6 @@
 import time
 import math as m
 import re
- 
 
 #------------------------------- EJERCICIO 2 ----------------------------------
 def burbuja(v):
