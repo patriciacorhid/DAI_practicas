@@ -168,10 +168,10 @@ def visualize_svg():
 # Página principal de la práctica 3
 @app.route('/p3/')
 def p3():
-    return render_template('p3.html')
+  return render_template('p3.html')
 
 # Sign in (Acceso a usuario registrado)
-@app.route('/login/',methods=['POST', 'GET'])
+@app.route('/login/', methods=['POST'])
 def login():
   # Pido datos del formulario
   username = request.form['username']
@@ -203,18 +203,20 @@ def login():
 def exit():
   # Poner sesión vacía
   session['username'] = ''
+  session['url'] = []
+  session['nurl'] = []
 
   #Volver a la página inicial
   return redirect(url_for('p3'))
 
 # Registrarse
-@app.route('/signup/',methods=['POST', 'GET'])
+@app.route('/signup/')
 def signup():
   # Mostrar el template de registro
   return render_template('signup.html')
 
 # Guardar cuenta recien creada
-@app.route('/account_created/',methods=['POST', 'GET'])
+@app.route('/account_created/',methods=['POST'])
 def account_created():
   # Pido datos del formulario
   username = request.form['username']
@@ -250,7 +252,7 @@ def datos():
   return render_template('datos.html', user=session['username'], pwd=db[session['username']]['pass'])
 
 # Modificar datos
-@app.route('/modify/',methods=['POST', 'GET'])
+@app.route('/modify/',methods=['POST'])
 def modify():
   # Pido datos del formulario
   username = request.form['username']
@@ -290,22 +292,25 @@ def modify():
 def p1ej1():
 
   if request.method == 'GET':
-    # Guardamos el haber visitado la página en la base de datos
-    if session['username']:
-      #Url
-      temp = session['url']
-      temp.append("/p1ej1/")
-      session['url'] = temp
+    # Creamos session['url'] para guardar ahí las urls visitadas
+    if not 'url' in session:
+      session['url'] = []
+      session['nurl'] = []
+
+    # Guardamos el haber visitado la página
+    temp = session['url']
+    temp.append("/p1ej1/")
+    session['url'] = temp
     
-      #Nombre de la url
-      temp = session['nurl']
-      temp.append("Ejercicio 1")
-      session['nurl'] = temp
+    #Nombre de la url
+    temp = session['nurl']
+    temp.append("Ejercicio 1")
+    session['nurl'] = temp
     
-      # Solo queremos las 3 últimas páginas visitadas
-      if len(session['url']) > 3:
-        session['url'].pop(0)
-        session['nurl'].pop(0)
+    # Solo queremos las 3 últimas páginas visitadas
+    if len(session['url']) > 3:
+      session['url'].pop(0)
+      session['nurl'].pop(0)
 
     # Es la primera vez, generamos el número aleatorio
     session['intentos'] = 0
@@ -338,25 +343,54 @@ def p1ej1():
   
 
 # Página donde se encuentra el ejercicio 2 de la práctica 1
+@app.route('/p1ej2_burbuja/<v>')
+def p1ej2_burbuja(v):
+
+  # Creamos session['url'] para guardar ahí las urls visitadas
+  if not 'url' in session:
+    session['url'] = []
+    session['nurl'] = []
+
+  # Guardamos el haber visitado la página
+  temp = session['url']
+  temp.append("/p1ej2_burbuja/0,-3,8,5,11,2,4")
+  session['url'] = temp
+
+  # Nombre de la url
+  temp = session['nurl']
+  temp.append("Ejercicio 2 - Burbuja")
+  session['nurl'] = temp
+  
+  # Solo queremos las 3 últimas páginas visitadas
+  if len(session['url']) > 3:
+    session['url'].pop(0)
+    session['nurl'].pop(0)
+
+  return render_template('ejerciciosp1.html', title="Ejercicio 2", enunciado="Ordenación por burbuja del vector [" + str(v) + "]", resultado=ordena_burbuja(v))
+    
+# Página donde se encuentra el ejercicio 2 de la práctica 1
 @app.route('/p1ej2_insercion/<v>')
 def p1ej2_insercion(v):
 
-  # Guardamos el haber visitado la página en la base de datos
-  if session['username']:
-    # Url
-    temp = session['url']
-    temp.append("/p1ej2_insercion/0,-3,8,5,11,2,4")
-    session['url'] = temp
-
-    # Nombre de la url
-    temp = session['nurl']
-    temp.append("Ejercicio 2 - Insercion")
-    session['nurl'] = temp
+  # Creamos session['url'] para guardar ahí las urls visitadas
+  if not 'url' in session:
+    session['url']=[]
+    session['nurl'] = []
     
-    # Solo queremos las 3 últimas páginas visitadas
-    if len(session['url']) > 3:
-      session['url'].pop(0)
-      session['nurl'].pop(0)
+  # Guardamos el haber visitado la página
+  temp = session['url']
+  temp.append("/p1ej2_insercion/0,-3,8,5,11,2,4")
+  session['url'] = temp
+
+  # Nombre de la url
+  temp = session['nurl']
+  temp.append("Ejercicio 2 - Insercion")
+  session['nurl'] = temp
+    
+  # Solo queremos las 3 últimas páginas visitadas
+  if len(session['url']) > 3:
+    session['url'].pop(0)
+    session['nurl'].pop(0)
 
   return render_template('ejerciciosp1.html', title="Ejercicio 2", enunciado="Ordenación por inserción del vector [" + str(v) + "]", resultado=ordena_insercion(v))
 
@@ -365,22 +399,25 @@ def p1ej2_insercion(v):
 @app.route('/p1ej2_seleccion/<v>')
 def p1ej2_seleccion(v):
 
-  # Guardamos el haber visitado la página en la base de datos
-  if session['username']:
-    # Url
-    temp = session['url']
-    temp.append("/p1ej2_seleccion/0,-3,8,5,11,2,4")
-    session['url'] = temp
+  # Creamos session['url'] para guardar ahí las urls visitadas
+  if not 'url' in session:
+    session['url'] = []
+    session['nurl'] = []
 
-    # Nombre de la url
-    temp = session['nurl']
-    temp.append("Ejercicio 2 - Seleccion")
-    session['nurl'] = temp
+  # Guardamos el haber visitado
+  temp = session['url']
+  temp.append("/p1ej2_seleccion/0,-3,8,5,11,2,4")
+  session['url'] = temp
+
+  # Nombre de la url
+  temp = session['nurl']
+  temp.append("Ejercicio 2 - Seleccion")
+  session['nurl'] = temp
     
-    # Solo queremos las 3 últimas páginas visitadas
-    if len(session['url']) > 3:
-      session['url'].pop(0)
-      session['nurl'].pop(0)
+  # Solo queremos las 3 últimas páginas visitadas
+  if len(session['url']) > 3:
+    session['url'].pop(0)
+    session['nurl'].pop(0)
   
   return render_template('ejerciciosp1.html', title="Ejercicio 2", enunciado="Ordenación por selección del vector [" + str(v) + "]", resultado=ordena_seleccion(v))
 
@@ -389,22 +426,25 @@ def p1ej2_seleccion(v):
 @app.route('/p1ej3/<n>')
 def p1ej3(n):
 
-  # Guardamos el haber visitado la página en la base de datos
-  if session['username']:
-    # Url
-    temp = session['url']
-    temp.append("/p1ej3/200")
-    session['url'] = temp
+  # Creamos session['url'] para guardar ahí las urls visitadas
+  if not 'url' in session:
+    session['url'] = []
+    session['nurl'] = []
 
-    # Nombre de la url
-    temp = session['nurl']
-    temp.append("Ejercicio 3")
-    session['nurl'] = temp
+  # Guardamos el haber visitado la página
+  temp = session['url']
+  temp.append("/p1ej3/200")
+  session['url'] = temp
+
+  # Nombre de la url
+  temp = session['nurl']
+  temp.append("Ejercicio 3")
+  session['nurl'] = temp
     
-    # Solo queremos las 3 últimas páginas visitadas
-    if len(session['url']) > 3:
-      session['url'].pop(0)
-      session['nurl'].pop(0)
+  # Solo queremos las 3 últimas páginas visitadas
+  if len(session['url']) > 3:
+    session['url'].pop(0)
+    session['nurl'].pop(0)
   
   return render_template('ejerciciosp1.html', title="Ejercicio 3", enunciado="Criba de Erastótenes del número " + str(n), resultado=criba_erastotenes(n))
 
@@ -413,22 +453,25 @@ def p1ej3(n):
 @app.route('/p1ej4/<n>')
 def p1ej4(n):
 
-  # Guardamos el haber visitado la página en la base de datos
-  if session['username']:
-    # Url
-    temp = session['url']
-    temp.append("/p1ej4/9")
-    session['url'] = temp
+  # Creamos session['url'] para guardar ahí las urls visitadas
+  if not 'url' in session:
+    session['url']=[]
+    session['nurl'] = []
 
-    # Nombre de la url
-    temp = session['nurl']
-    temp.append("Ejercicio 4")
-    session['nurl'] = temp
+  # Guardamos el haber visitado la página
+  temp = session['url']
+  temp.append("/p1ej4/9")
+  session['url'] = temp
+
+  # Nombre de la url
+  temp = session['nurl']
+  temp.append("Ejercicio 4")
+  session['nurl'] = temp
     
-    # Solo queremos las 3 últimas páginas visitadas
-    if len(session['url']) > 3:
-      session['url'].pop(0)
-      session['nurl'].pop(0)
+  # Solo queremos las 3 últimas páginas visitadas
+  if len(session['url']) > 3:
+    session['url'].pop(0)
+    session['nurl'].pop(0)
   
   return render_template('ejerciciosp1.html', title="Ejercicio 4", enunciado="Número de Fibonacci en la posición " + str(n), resultado=Fibonacci(n))
 
@@ -437,22 +480,25 @@ def p1ej4(n):
 @app.route('/p1ej5/<v>')
 def p1ej5(v):
 
-   # Guardamos el haber visitado la página en la base de datos
-  if session['username']:
-    # Url
-    temp = session['url']
-    temp.append("/p1ej5/[[][[]]]")
-    session['url'] = temp
+  # Creamos session['url'] para guardar ahí las urls visitadas
+  if not 'url' in session:
+    session['url'] = []
+    session['nurl'] = []
 
-    # Nombre de la url
-    temp = session['nurl']
-    temp.append("Ejercicio 5")
-    session['nurl'] = temp
+  # Guardamos el haber visitado la página
+  temp = session['url']
+  temp.append("/p1ej5/[[][[]]]")
+  session['url'] = temp
+
+  # Nombre de la url
+  temp = session['nurl']
+  temp.append("Ejercicio 5")
+  session['nurl'] = temp
     
-    # Solo queremos las 3 últimas páginas visitadas
-    if len(session['url']) > 3:
-      session['url'].pop(0)
-      session['nurl'].pop(0)
+  # Solo queremos las 3 últimas páginas visitadas
+  if len(session['url']) > 3:
+    session['url'].pop(0)
+    session['nurl'].pop(0)
       
   return render_template('ejerciciosp1.html', title= "Ejercicio 5", enunciado="Comprobar si la secuencia " + str(v) + " es o no correcta", resultado=func_parentesis(v))
 
@@ -460,22 +506,25 @@ def p1ej5(v):
 @app.route('/p1ej61/<v>')
 def p1ej61(v):
 
-   # Guardamos el haber visitado la página en la base de datos
-  if session['username']:
-    # Url
-    temp = session['url']
-    temp.append("/p1ej61/El%20agente%20A%20preparaba%20los%20planes%20de%20su%20misión.%20Esta%20noche%20se%20encontraría%20con%20su%20archienemigo%20B%20y%20esperabo%20poder%20derrotarlo%20de%20una%20vez%20por%20todas.")
-    session['url'] = temp
+  # Creamos session['url'] para guardar ahí las urls visitadas
+  if not 'url' in session:
+    session['url'] = []
+    session['nurl'] = []
+
+  # Guardamos el haber visitado la página
+  temp = session['url']
+  temp.append("/p1ej61/El%20agente%20A%20preparaba%20los%20planes%20de%20su%20misión.%20Esta%20noche%20se%20encontraría%20con%20su%20archienemigo%20B%20y%20esperabo%20poder%20derrotarlo%20de%20una%20vez%20por%20todas.")
+  session['url'] = temp
     
-    # Nombre de la url
-    temp = session['nurl']
-    temp.append("Ejercicio 6 - Mayúscula")
-    session['nurl'] = temp
+  # Nombre de la url
+  temp = session['nurl']
+  temp.append("Ejercicio 6 - Mayúscula")
+  session['nurl'] = temp
     
-    # Solo queremos las 3 últimas páginas visitadas
-    if len(session['url']) > 3:
-      session['url'].pop(0)
-      session['nurl'].pop(0)
+  # Solo queremos las 3 últimas páginas visitadas
+  if len(session['url']) > 3:
+    session['url'].pop(0)
+    session['nurl'].pop(0)
   
   return render_template('ejerciciosp1.html', title="Ejercicio 6", enunciado= "Palabras que empiezan con mayúscula tras un espacio del texto: " + str(v), resultado=func_reg1(v))
 
@@ -483,22 +532,25 @@ def p1ej61(v):
 @app.route('/p1ej62/<v>')
 def p1ej62(v):
 
-   # Guardamos el haber visitado la página en la base de datos
-  if session['username']:
-    # Url
-    temp = session['url']
-    temp.append("/p1ej62/Busqué%20su%20correo%20desesperadamente%20entre%20aquella%20larga%20lista:%20maria223@gmail.com,%20pepito_chiquitito@yahoo.es,%20jose28ramirez@google45.org...%20Aquí%20está:%20lola_la_ola_6544@sss.es")
-    session['url'] = temp
+  # Creamos session['url'] para guardar ahí las urls visitadas
+  if not 'url' in session:
+    session['url'] = []
+    session['nurl'] = []
+
+  # Guardamos el haber visitado la página
+  temp = session['url']
+  temp.append("/p1ej62/Busqué%20su%20correo%20desesperadamente%20entre%20aquella%20larga%20lista:%20maria223@gmail.com,%20pepito_chiquitito@yahoo.es,%20jose28ramirez@google45.org...%20Aquí%20está:%20lola_la_ola_6544@sss.es")
+  session['url'] = temp
     
-    # Nombre de la url
-    temp = session['nurl']
-    temp.append("Ejercicio 6 - Correo")
-    session['nurl'] = temp
+  # Nombre de la url
+  temp = session['nurl']
+  temp.append("Ejercicio 6 - Correo")
+  session['nurl'] = temp
     
-    # Solo queremos las 3 últimas páginas visitadas
-    if len(session['url']) > 3:
-      session['url'].pop(0)
-      session['nurl'].pop(0)
+  # Solo queremos las 3 últimas páginas visitadas
+  if len(session['url']) > 3:
+    session['url'].pop(0)
+    session['nurl'].pop(0)
   
   return render_template('ejerciciosp1.html', title="Ejercicio 6", enunciado= "Correos electrónicos del texto: " + str(v),  resultado=func_reg2(v))
 
@@ -506,20 +558,24 @@ def p1ej62(v):
 @app.route('/p1ej63/<v>')
 def p1ej63(v):
 
-   # Guardamos el haber visitado la página en la base de datos
-  if session['username']:
-    temp = session['url']
-    temp.append("/p1ej63/%20No%20me%20acordaba%20de%20su%20cuenta%20bancaria:1234-1234-5678-5678,%201111-1111-1111-1111,9874%205632%201447%201444.%20Todos%20intentos%20fallidos.%20Ya%20era%2019-03-2020,%20necesitaba%20la%20cuenta%20urgentemente")
-    session['url'] = temp
+  # Creamos session['url'] para guardar ahí las urls visitadas
+  if not 'url' in session:
+    session['url'] = []
+    session['nurl'] = []
 
-    # Nombre de la url
-    temp = session['nurl']
-    temp.append("Ejercicio 6 - Cuentas")
-    session['nurl'] = temp
+  # Guardamos el haber visitado la página
+  temp = session['url']
+  temp.append("/p1ej63/%20No%20me%20acordaba%20de%20su%20cuenta%20bancaria:1234-1234-5678-5678,%201111-1111-1111-1111,9874%205632%201447%201444.%20Todos%20intentos%20fallidos.%20Ya%20era%2019-03-2020,%20necesitaba%20la%20cuenta%20urgentemente")
+  session['url'] = temp
+
+  # Nombre de la url
+  temp = session['nurl']
+  temp.append("Ejercicio 6 - Cuentas")
+  session['nurl'] = temp
     
-    # Solo queremos las 3 últimas páginas visitadas
-    if len(session['url']) > 3:
-      session['url'].pop(0)
-      session['nurl'].pop(0)
+  # Solo queremos las 3 últimas páginas visitadas
+  if len(session['url']) > 3:
+    session['url'].pop(0)
+    session['nurl'].pop(0)
   
   return render_template('ejerciciosp1.html', title="Ejercicio 6", enunciado= "Cuentas bancarias del texto: " + str(v), resultado=func_reg3(v))

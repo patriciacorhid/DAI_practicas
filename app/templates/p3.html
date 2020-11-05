@@ -81,7 +81,7 @@
         <nav id="Menu" class="col-md-2 col-lg-2 d-md-block sidebar collapse">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-	  {% if session['username'] %}
+	  {% if 'url' in session %}
 	  <li class="nav-item ml-3">
             <h6>Últimas páginas visitadas:</h6>
           </li>
@@ -128,7 +128,7 @@
 
 	<!-- Texto de la página -->
 	{% block intro %}
-	<h1 class="col-md-10 col-lg-10 mt-5"> Práctica 3:</h1>
+	<h1 class="col-md-10 col-lg-10 mt-5">Práctica 3:</h1>
 	<h3> Resolución de los ejercicios de la práctica 2.</h3>
       <p class="lead"> Seleccione en el menú de navegación el ejercicio que quiera ver resuelto.</p>
       {% endblock intro %}
