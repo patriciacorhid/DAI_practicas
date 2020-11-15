@@ -1,7 +1,8 @@
 #./app/app.py
 from flask import Flask, session, request, flash, redirect, url_for
 from flask import render_template
-from pickleshare import *
+from model import *
+#from pickleshare import *
 
 from ejercicios import burbuja
 from ejercicios import insercion
@@ -17,11 +18,12 @@ import time
 import math as m
 import re
 
-from random import randint 
+from random import randint
 
 app = Flask(__name__)
 app.secret_key = 'thesecretprotectsitself'
 
+'''
 # Usuarios de Cactus Web (P3) 
 db = PickleShareDB('miBD')
 
@@ -36,6 +38,7 @@ db['Pepe'] = db['Pepe']
 db['Maria'] = dict()
 db['Maria']['pass'] = '1111'
 db['Maria'] = db['Maria']
+'''
           
 @app.route('/')
 def hello_world():
@@ -171,6 +174,7 @@ def p3():
   return render_template('p3.html')
 
 # Sign in (Acceso a usuario registrado)
+'''
 @app.route('/login/', methods=['POST'])
 def login():
   # Pido datos del formulario
@@ -179,6 +183,34 @@ def login():
 
   if username in db:
     if db[username]['pass'] == password:
+      # Si ya está resistrado y su contraseña coincide,
+      # iniciar sesión y mostrar mensaje de bienvenida
+      session['username'] = username
+      session['url'] = []
+      session['nurl'] = [] # Nombre de las url
+      flash('Bienvenid@ ' + username)
+
+    else:
+      # Si ya está resistrado y su contraseña no coincide,
+      # mostrar mensaje de error
+      flash('Contraseña inválida')
+
+  else:
+    # Si no está resistrado, mostrar mensaje de error
+    flash('Usuario inválido')
+
+  #Volver a la página principal con el mensaje correspondiente.
+  return redirect(url_for('p3'))
+'''
+
+@app.route('/login/', methods=['POST'])
+def login():
+  # Pido datos del formulario
+  username = request.form['username']
+  password = request.form['password']
+
+  if user_registrado(username):
+    if pwd_correcta(username, password):
       # Si ya está resistrado y su contraseña coincide,
       # iniciar sesión y mostrar mensaje de bienvenida
       session['username'] = username
@@ -215,6 +247,7 @@ def signup():
   # Mostrar el template de registro
   return render_template('signup.html')
 
+'''
 # Guardar cuenta recien creada
 @app.route('/account_created/',methods=['POST'])
 def account_created():
@@ -245,12 +278,49 @@ def account_created():
 
   # Redirijo a la página oficial
   return redirect(url_for('p3'))
+'''
+
+# Guardar cuenta recien creada
+@app.route('/account_created/',methods=['POST'])
+def account_created():
+  # Pido datos del formulario
+  username = request.form['username']
+  password = request.form['password']
+
+  # Si el nombre es vacío, muestro mensaje de error
+  if username == '':
+    flash('Usuario inválido')
+    return redirect(url_for('signup'))
+
+  # Si el nombre ya existe, muestro mensaje de error
+  if user_registrado(username):
+    flash('Usuario inválido. Este usuario ya existe')
+    return redirect(url_for('signup'))
+
+  # Guardo los datos en la base de datos
+  crea_user(username, password)
+
+  # Inicio sesión con este nuevo individuo y pongo mensaje de bienvenida
+  session['username'] = username
+  session['url'] = []
+  session['nurl'] = []
+  flash('Bienvenid@ ' + username)
+
+  # Redirijo a la página oficial
+  return redirect(url_for('p3'))
 
 # Visualizar datos usuario
+'''
 @app.route('/datos/')
 def datos():
   return render_template('datos.html', user=session['username'], pwd=db[session['username']]['pass'])
+'''
 
+@app.route('/datos/')
+def datos():
+  return render_template('datos.html', user=session['username'], pwd=get_pwd(session['username']))
+
+'''
 # Modificar datos
 @app.route('/modify/',methods=['POST'])
 def modify():
@@ -275,6 +345,37 @@ def modify():
   db[username] = dict()
   db[username]['pass'] = password
   db[username] = db[username]
+
+  # Inicio sesión con este nuevo individuo y pongo mensaje de bienvenida
+  session['username'] = username
+  flash('Datos de ' + username + ' actualizados correctamente.')
+
+  # Redirijo a la página oficial
+  return redirect(url_for('datos'))
+'''
+
+# Modificar datos
+@app.route('/modify/',methods=['POST'])
+def modify():
+  # Pido datos del formulario
+  username = request.form['username']
+  password = request.form['password']
+
+  # Si el nombre es vacío, muestro mensaje de error
+  if username == '':
+    flash('Usuario inválido')
+    return redirect(url_for('datos'))
+
+  # Si el nombre ya existe, muestro mensaje de error
+  if user_registrado(username) and username != session['username']:
+    flash('Usuario inválido. Este usuario ya existe')
+    return redirect(url_for('datos'))
+
+  #Elimino el usuario anterior
+  borra_user(session['username'])
+
+  # Guardo los datos en la base de datos
+  crea_user(username, password)
 
   # Inicio sesión con este nuevo individuo y pongo mensaje de bienvenida
   session['username'] = username
@@ -326,7 +427,14 @@ def p1ej1():
       session['n'] = randint(0,100)
       return render_template('p1ej1.html', title="Ejercicio 1", enunciado="Adivina el número del 1 al 100")
 
-    num  = int(request.form['num'])
+    # Compruebo que la entrada no es vacía
+    num  = request.form['num']
+    if num == '':
+      flash("Número inválido.")
+      return render_template('p1ej1.html', title="Ejercicio 1", enunciado="Adivina el número del 1 al 100")
+
+    # Recojo el número del formulario y aumento el número de intentos
+    num = int(request.form['num'])
     session['intentos']+=1
 
     if num == session['n']:
