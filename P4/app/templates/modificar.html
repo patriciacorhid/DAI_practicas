@@ -1,0 +1,24 @@
+{% extends "p4.html" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block busqueda %}
+{% endblock %}
+
+{% block insertar %}
+{% endblock %}
+
+{% block modificar %}
+<!-- Formulario para modificación de película -->
+<div class="container">
+  <form class="form-inline mt-2" method='POST' action="/mod_title">
+    <h5> Introduzca el título de la película que quiere modificar: </h5>
+    <input name="title" class="form-control mr-2" type="text" placeholder="Título">
+    <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Modificar</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block lista %}
+{% endblock %}

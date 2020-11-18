@@ -3,9 +3,22 @@
 {% block intro %}
 {% endblock %}
 
+{% block busqueda %}
+{% endblock %}
+
+{% block insertar %}
+{% endblock %}
+
+{% block modificar %}
+{% endblock %}
+
 {% block lista %}
 
- <a class="btn btn-outline-success  ml-5 my-2" href="/mongo"> Volver a la página principal</a>
+{% if buscar %}
+<a class="btn btn-outline-success  ml-5 my-2" href="/buscar"> Volver a buscar</a>
+{% else %}
+<a class="btn btn-outline-success  ml-5 my-2" href="/mongo"> Volver a la página principal</a>
+{% endif %}
 
     <div class="container">
       <div class="row">

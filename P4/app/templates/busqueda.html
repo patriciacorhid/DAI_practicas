@@ -1,0 +1,44 @@
+{% extends "p4.html" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block busqueda %}
+<!-- Formulario de búsqueda -->
+w<div class="container">
+  <form class="form-inline mt-2" method='POST' action="/title">
+    <input name="title" class="form-control mr-2" type="text" placeholder="Título">
+    <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Buscar</button>
+  </form>
+</div>
+
+<div class="container">
+  <form class="form-inline mt-2" method='POST' action="/year">
+    <input name="year" class="form-control mr-2" type="number" placeholder="Año">
+    <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Buscar</button>
+  </form>
+</div>
+
+<div class="container">
+  <form class="form-inline mt-2" method='POST' action="/imdb">
+    <input name="imdb" class="form-control mr-2" type="text" placeholder="IMDB">
+    <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Buscar</button>
+  </form>
+</div>
+
+<div class="container">
+  <form class="form-inline mt-2" method='POST' action="/type">
+    <input name="type" class="form-control mr-2" type="text" placeholder="Tipo">
+    <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Buscar</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block insertar %}
+{% endblock %}
+
+{% block modificar %}
+{% endblock %}
+
+{% block lista %}
+{% endblock %}
