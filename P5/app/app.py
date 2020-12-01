@@ -261,8 +261,30 @@ def api_1():
         return jsonify({'title': mtitle, 'year': int(myear), 'imdb': mimdb, 'type': mtype})
 
 
-@app.route('/api/movies/<id>',methods=['PUT', 'DELETE'])
+@app.route('/api/movies/<id>',methods=['GET','PUT', 'DELETE'])
 def api_2(id):
+
+    if request.method == 'GET':
+
+        # Compruebo que la película exista
+        movies = db.video_movies.find_one({'imdb': id})
+        lista_movies = []
+
+        for t in movies:
+            lista_movies.append(t)
+
+        # Si no existe la película, devuelvo mensaje de error
+        if(len(lista_movies)==0):
+            return jsonify({'error':'La película no existe'}), 404
+
+        # Cojo los datos
+        mtitle = movies['title']
+        myear = movies['year']
+        mimdb = id
+        mtype = movies['type']
+
+        # Devuelvo la película
+        return jsonify({'title': mtitle, 'year': int(myear), 'imdb': mimdb, 'type': mtype})
     
     if request.method == 'PUT':
 
