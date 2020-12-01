@@ -289,7 +289,7 @@ def api_2(id):
             return jsonify({'error':'Se intenta introducir película inválida'})
 
         # Modifico la película
-        db.video_movies.find_one_and_update({'mimdb': mimdb}, {"$set":{'year': int(myear), 'title': mtitle, 'type': mtype}})
+        db.video_movies.find_one_and_update({'imdb': mimdb}, {"$set":{'year': int(myear), 'title': mtitle, 'type': mtype}})
         return jsonify({'title': mtitle, 'year': int(myear), 'imdb': mimdb, 'type': mtype})
 
     if request.method== 'DELETE':
@@ -306,6 +306,6 @@ def api_2(id):
             return jsonify({'error':'La película no existe'}), 404
         
         # Elimino la película
-        db.video_movies.delete_one({'mimdb': id})
+        db.video_movies.delete_one({'imdb': id})
         return jsonify({'imdb': id})
         
