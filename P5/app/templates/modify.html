@@ -1,0 +1,33 @@
+{% extends "p4.html" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block busqueda %}
+{% endblock %}
+
+{% block insertar %}
+{% endblock %}
+
+{% block modificar %}
+<h4>Datos de {{ movie['title'] }}:</h4>
+
+  <!-- Formulario de registro -->
+  <div class="container">
+    <form class="form-inline" method='POST' action="/mod/{{ movie['title'] }}">
+      <label for="year">Año:   </label>
+      <input name="year" class="form-control mr-2" type="number" value="{{ movie['year'] }}"><br><br>
+      
+      <label for="imdb">IMDB:   </label>
+      <input name="imdb" class="form-control mr-2" type="text" value="{{ movie['imdb'] }}"><br><br>
+      
+      <label for="type">Tipo: </label>
+      <input name="type" class="form-control mr-2" type="text" value="{{ movie['type'] }}"><br><br>
+      
+      <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Guardar</button>
+    </form>
+  </div>
+{% endblock %}
+
+{% block lista %}
+{% endblock %}

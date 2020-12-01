@@ -1,0 +1,23 @@
+{% extends "p4.html" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block busqueda %}
+{% endblock %}
+
+{% block insertar %}
+<!-- Formulario para modificación de película -->
+<div class="container">
+  <form class="form-inline mt-2" method='POST' action="/borrado">
+    <h5> Introduzca el título de la película que quiere borrar: </h5>
+    <input name="title" class="form-control mr-2" type="text" placeholder="Título">
+    <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Borrar</button>
+  </form>
+{% endblock %}
+
+{% block modificar %}
+{% endblock %}
+
+{% block lista %}
+{% endblock %}

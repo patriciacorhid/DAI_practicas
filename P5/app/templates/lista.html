@@ -1,0 +1,59 @@
+{% extends "p4.html" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block busqueda %}
+{% endblock %}
+
+{% block insertar %}
+{% endblock %}
+
+{% block modificar %}
+{% endblock %}
+
+{% block lista %}
+
+{% if buscar %}
+<a class="btn btn-outline-success  ml-5 my-2" href="/buscar"> Volver a buscar</a>
+{% else %}
+<a class="btn btn-outline-success  ml-5 my-2" href="/mongo"> Volver a la página principal</a>
+{% endif %}
+
+    <div class="container">
+      <div class="row">
+	<div class="col-sm">
+	  <strong>Título</strong>
+	</div>
+	<div class="col-sm">
+	  <strong>Año</strong>
+	</div>
+	<div class="col-sm">
+	  <strong>IMDB</strong>
+	</div>
+	<div class="col-sm">
+	  <strong>Tipo</strong>
+	</div>
+      </div>
+    </div>
+
+    {% for movie in movies %}
+    <div class="container">
+      <div class="row">
+	<div class="col-sm">
+	  {{movie['title']}}
+	</div>
+	<div class="col-sm">
+	  {{movie['year']}}
+	</div>
+	<div class="col-sm">
+	  {{movie['imdb']}}
+	</div>
+	<div class="col-sm">
+	  {{movie['type']}}
+	</div>
+      </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
