@@ -1,22 +1,28 @@
 from django import forms
 from .models import Libro, Autor, Prestamo
 from django.core.exceptions import ValidationError
-from django.utils import timezone
+import datetime
 
-class Add_LibroForm(forms.Form):
-    titulo  = forms.CharField(help_text="Inserte el título del libro: ")
-    portada = forms.ImageField(help_text="Inserte la portada del libro: ". required = False)
+#------ Formularios objetos --------
 
-class Add_PrestamoForm(forms.Form):
-    libro   = forms.CharField("Inserte el título del libro: ")
-    fecha   = forms.DateField("Inserte la fecha del préstamo: ")
-    usuario = forms.CharField("Inserte el nombre del solicitante: ")
+class Libro_form(forms.ModelForm):
+    class Meta:
+        model = Libro
+        fields = ('titulo', 'portada',)
+
+class Prestamo_form(forms.ModelForm):
+    class Meta:
+        model = Prestamo
+        fields = ('libro', 'fecha', 'usuario',)
 
     def clean_fecha(self):
         fecha = self.cleaned_data['fecha']
 
-        if fecha < timezone.now():
-            raise ValidationError(_("Fecha inválida"))
+        if fecha < datetime.date.today():
+            raise ValidationError("Fecha inválida")
+        return fecha
     
-class Add_AutorForm(forms.Form):
-    nombre  = forms.CharField(help_text="Inserte el nombre del autor: ")
+class Autor_form(forms.ModelForm):
+    class Meta:
+        model = Autor
+        fields = ('nombre', 'libros',)

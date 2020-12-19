@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+{% endblock %}
+
+{% block formulario %}
+{% endblock %}
+
+
+{% block lista %}
+
+    <div class="container">
+      <div class="row">
+	<div class="col-sm">
+	  <strong>Id</strong>
+	</div>
+	<div class="col-sm">
+	  <strong>Libro</strong>
+	</div>	
+	<div class="col-sm">
+	  <strong>Autor</strong>
+	</div>
+	<div class="col-sm">
+	  <strong>Portada</strong>
+	</div>
+      </div>
+    </div>
+
+    {% for libro in libros %}
+    <div class="container">
+      <div class="row">	
+	<div class="col-sm">
+	  {{ libro.id }}
+	</div>
+	<div class="col-sm">
+	  {{ libro.titulo }}
+	</div>
+	<div class="col-sm">
+	  {{ libro.autor }}
+	</div>
+	<div class="col-sm">
+	  <img src="{{libro.portada.url}}" width="60" height="100">
+	</div>
+      </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

@@ -5,16 +5,24 @@ from . import views
 
 urlpatterns = [
   path('', views.index, name='index'),
-    
-  path('libro_add', views.Libro_add, name='Libro_add'),
-  path('prestamo_add', views.Prestamo_add, name='Prestamo_add'),
-  path('autor_add', views.Autor_add, name='Autor_add'),
 
-  path('libro_modif', views.Libro_modif, name='Libro_modif'),
-  path('prestamo_modif', views.Prestamo_modif, name='Prestamo_modif'),
-  path('autor_modif', views.Autor_modif, name='Autor_modif'),
+  # URLs para mostrar la lista de objetos
+  path('lista_libros', views.libros, name='libros'),
+  path('lista_prestamos', views.prestamos, name='prestamos'),
+  path('lista_autores', views.autores, name='autores'),
 
-  path('libro_borrar', views.Libro_borrar, name='Libro_borrar'),
-  path('prestamo_borrar', views.Prestamo_borrar, name='Prestamo_borrar'),
-  path('autor_borrar', views.Autor_borrar, name='Autor_borrar'),
+  # URLs para añadir un objeto
+  path('add_libro', views.add_libro, name='add_libro'),
+  path('add_prestamo', views.add_prestamo, name='add_prestamo'),
+  path('add_autor', views.add_autor, name='add_autor'),
+
+    # URLs para mostrar la modificar un objeto por el campo Id (pk = primary key, que es el Id del objeto)
+  path('modif_libro/<int:pk>', views.modif_libro, name='modif_libro'),
+  path('modif_prestamo/<int:pk>', views.modif_prestamo, name='modif_prestamo'),
+  path('modif_autor/<int:pk>', views.modif_autor, name='modif_autor'),
+
+  # URLs para mostrar la borrar un objeto por el campo Id
+  path('borrar_libro/<int:pk>', views.borrar_libro, name='borrar_libro'),
+  path('borrar_prestamo/<int:pk>', views.borrar_prestamo, name='borrar_prestamo'),
+  path('borrar_autor/<int:pk>', views.borrar_autor, name='borrar_autor'),
 ]

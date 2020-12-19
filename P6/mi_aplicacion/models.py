@@ -13,9 +13,12 @@ class Prestamo(models.Model):
   fecha   = models.DateField(default=timezone.now)
   usuario = models.CharField(max_length=100)
 
+  def __str__(self):
+    return self.libro + " - " + self.usuario
+
 class Autor(models.Model):
   nombre = models.CharField(max_length=200)
   libros = models.ManyToManyField(Libro)
 
   def __str__(self):
-    return self.nombre + " es el autor de: " + self.libros
+    return self.nombre
