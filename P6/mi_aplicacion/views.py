@@ -10,21 +10,15 @@ from .models import Libro, Autor, Prestamo
 def index(request):
     return HttpResponse('Hello World!')
 
+#------ Página de inicio ----------------
+
+def p4(request):
+    return render(request, "base.html")
+
 #------ Mostrar tablas por pantalla -----
 
 def libros(request):
     libros = Libro.objects.all()
-    """
-    autores = Autor.objects.all()
-    aut = []
-
-    for libro in libros:
-        for autor in autores:
-            for l in autor.libros:
-                if libro.titulo == l:
-                    libro.autor = autor
-
-    """
     return render(request, "lista_libros.html", {'libros': libros})
 
 def prestamos(request):

@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
   path('', views.index, name='index'),
+  path('p4', views.p4, name='p4'),
 
   # URLs para mostrar la lista de objetos
   path('lista_libros', views.libros, name='libros'),

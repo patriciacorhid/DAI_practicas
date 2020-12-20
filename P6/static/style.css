@@ -1,0 +1,49 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  line-height: 40px; /* Vertically center the text there */
+  background-color: #ebfe98;
+}
+
+body > .container {
+  padding: 60px 15px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+#navbar {
+  background-color: #299bb9;
+}
+
+#Menu {
+  background-color: #77cadd;
+}
+
+#boton {
+    color: #ff0097;
+  background-color: #ffdff2;
+  border-color: #ff0097;
+}
+
+.dropdown-menu {
+  background-color: #299bb9; 
+}
+
