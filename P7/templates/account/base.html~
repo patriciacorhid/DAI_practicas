@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Practica 6</title>
+    <!-- CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" >
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}" >
+    
+  </head>
+
+  
+  <body>
+    <header>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark" id="navbar">
+	<a href="/p4" class="navbar-left"><img width="80" height="100" src="{% static 'logo2.png' %}"></a>
+        <a class="navbar-brand" href="/p4">Práctica 6</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false">
+          <span class="navbar-toggler-icon"></span>		
+        </button>
+
+	<div class="collapse navbar-collapse" id="navbarCollapse">
+	<ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/lista_libros">Lista de libros</a>
+            </li>
+	    <li class="nav-item active">
+              <a class="nav-link" href="/lista_prestamos">Lista de préstamos</a>
+            </li>
+	    <li class="nav-item active">
+              <a class="nav-link" href="/lista_autores">Lista de autores</a>
+            </li>
+	</ul>
+	</div>
+	
+      </nav>
+    </header>
+
+    <!-- Contenido de la web -->
+	<!-- Texto de la página -->
+    {% block intro %}
+    <main role="main" class="container-fluid col-md-10 col-lg-10" >
+      <h1 class="col-md-10 col-lg-10 mt-5">Práctica 6:</h1>
+      <h5 class="col-md-10 col-lg-10">Base de datos de libros</h5>
+      
+      <div class="container">
+	<div class="row">
+	  <div class="col-sm">
+	    <a id="boton" class="btn btn-outline-success  ml-5 my-2" href="/add_libro"> Añadir libro</a>
+	  </div>
+	  <div class="col-sm">
+	    <a id="boton" class="btn btn-outline-success  ml-5 my-2" href="/add_prestamo"> Añadir préstamo</a>
+	  </div>
+	  <div class="col-sm">
+	    <a id="boton" class="btn btn-outline-success  ml-5 my-2" href="/add_autor"> Añadir autor</a>
+	  </div>
+	</div>
+      </div>
+
+      <p class="col-md-10 col-lg-10">Para modificar un elemento modifique la url con: /modif_{libro, prestamo, autor}/id </br> Para modificar un elemento modifique la url con: /borrar_{libro, prestamo, autor}/id</p>
+      {% endblock %}
+
+      {% block titulo %}
+      {% endblock %}
+      <div class="container">
+	{% block formulario %}
+	{% endblock %}   
+      </div>
+
+      {% block content %}
+      {% endblock %}
+      
+      {% block lista %}
+      {% endblock %}
+    </main>
+
+    <!-- Pie de pagina-->
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Practica 6</span>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

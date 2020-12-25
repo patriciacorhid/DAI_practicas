@@ -1,0 +1,50 @@
+{% extends "account/base.html" %}
+
+{% load account socialaccount %}
+
+{% block intro %}
+{% endblock %}
+
+{% block titulo %}
+{% endblock %}
+
+
+{% block formulario %}
+
+<h1> Inicie sesión </h1>
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p> Registrese con una cuenta existente de una página tercera o <a href="{{ signup_url }}"> registrese aquí</a></p>
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+  <div class="login-or"> o </div>
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>Si no tiene cuenta
+<a href="{{ signup_url }}">registrese</a> primero.</p>
+{% endif %}
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button class="primaryAction" type="submit">Iniciar sesión</button>
+</form>
+
+{% endblock %}
+
+{% block lista %}
+{% endblock %}

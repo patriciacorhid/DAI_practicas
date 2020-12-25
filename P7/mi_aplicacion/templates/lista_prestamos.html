@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block titulo %}
+{% endblock %}
+
+{% block formulario %}
+{% endblock %}
+
+
+{% block lista %}
+
+    <div class="container">
+      <div class="row">
+	<div class="col-sm">
+	  <strong>Id</strong>
+	</div>
+	<div class="col-sm">
+	  <strong>Libro</strong>
+	</div>
+	<div class="col-sm">
+	  <strong>Fecha</strong>
+	</div>
+	<div class="col-sm">
+	  <strong>Usuario</strong>
+	</div>
+      </div>
+    </div>
+
+    {% for prestamo in prestamos %}
+    <div class="container">
+      <div class="row">
+	<div class="col-sm">
+	  {{ prestamo.id }}
+	</div>
+	<div class="col-sm">
+	  {{ prestamo.libro }}
+	</div>
+	<div class="col-sm">
+	  {{ prestamo.fecha }}
+	</div>
+	<div class="col-sm">
+	  {{ prestamo.usuario }}
+	</div>
+      </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
