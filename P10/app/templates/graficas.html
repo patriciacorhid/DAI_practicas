@@ -1,0 +1,69 @@
+{% extends "p4.html" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block busqueda %}
+<div id="grafica1" style="width:90%; height:400px;"></div>
+<!--
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const chart = Highcharts.chart('grafica1', {
+          chart: {
+              type: 'bar'
+          },
+          title: {
+              text: 'Películas por década'
+          },
+          xAxis: {
+              categories: {{ v_decadas }}
+          },
+          yAxis: {
+              title: {
+                  text:""
+              }
+          },
+          series: [{
+	      name: 'Total de peliculas de la década',
+              data: {{ v_pelis_decada }}
+          }]
+      });
+  });
+</script>
+-->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const chart = Highcharts.chart('grafica1', {
+          chart: {
+              type: 'bar'
+          },
+          title: {
+              text: 'Pokemons de cada tipo'
+          },
+          xAxis: {
+              categories: {{ v_decadas }}
+          },
+          yAxis: {
+              title: {
+                  text: 'Número de Pokemon'
+              }
+          },
+          series: [{
+	      name: "patata",
+              data: {{ v_pelis_decada }}
+          }]
+      });
+  });  
+</script>
+{{ v_pelis_decada }}
+{{ v_decadas }}
+{% endblock %}
+
+{% block insertar %}
+{% endblock %}
+
+{% block modificar %}
+{% endblock %}
+
+{% block lista %}
+{% endblock %}

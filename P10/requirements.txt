@@ -1,0 +1,4 @@
+# requirements.txt
+flask==1.1
+Flask-RESTful == 0.3.8
+pymongo

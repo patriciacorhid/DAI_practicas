@@ -1,0 +1,26 @@
+{% extends "p4.html" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block busqueda %}
+{% endblock %}
+
+{% block insertar %}
+          <!-- Formulario para insercción de película -->
+<div class="container">
+  <form class="form-inline mt-2" method='POST' action="/insert">
+    <input name="title" class="form-control mr-2" type="text" placeholder="Título">
+    <input name="year" class="form-control mr-2" type="number" placeholder="Año">
+    <input name="imdb" class="form-control mr-2" type="text" placeholder="IMDB">
+    <input name="type" class="form-control mr-2" type="text" placeholder="Tipo">	      
+    <button class="btn btn-outline-success  my-2 mx-sm-2" type="submit">Insertar</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block modificar %}
+{% endblock %}
+
+{% block lista %}
+{% endblock %}

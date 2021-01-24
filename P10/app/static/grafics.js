@@ -1,0 +1,54 @@
+// --------------  Muestra películas recomendadas -------------
+var images=["/static/recomendadas/west_side_story.jpeg", "/static/recomendadas/star_wars5.jpeg", "/static/recomendadas/show_truman.jpeg", "/static/recomendadas/pretty_woman.jpeg", "/static/recomendadas/lost_translation.jpeg", "/static/recomendadas/planeta_tesoro.jpeg", "/static/recomendadas/into_wild.jpeg", "/static/recomendadas/club_poetas_muertos.jpeg"];
+
+// Número de la imagen que se muestra
+var num = 0;
+
+// Pasar a imagen previa
+function prev(){
+    var cartelera = document.getElementById("pelis");
+    num--;
+    if(num<0){
+	num = images.length-1;
+    }
+    cartelera.src = images[num];
+}
+
+// Pasar a imagen siguiente
+function next(){
+    var cartelera = document.getElementById("pelis");
+    num++;
+    if(num>=images.length){
+	num = 0;
+    }
+    cartelera.src = images[num];
+}
+
+// --------------------- Dibuja gráficas --------------------
+/*
+document.addEventListener('DOMContentLoaded', function () {
+	const chart = Highcharts.chart('grafica1', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Fruit Consumption'
+        },
+        xAxis: {
+            categories: ['Apples', 'Bananas', 'Oranges']
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
+            }
+        },
+        series: [{
+            name: 'Jane',
+            data: [8, 0, 4]
+        }, {
+            name: 'John',
+            data: [5, 7, 3]
+        }]
+    });
+});
+*/

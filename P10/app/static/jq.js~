@@ -1,0 +1,268 @@
+//--------------------------- DARK MODE ---------------------------
+// Cambia el Dark Mode al darle al botón 
+function darkMode(){
+    
+    var content = document.body;
+    var DARKMODE = (localStorage.getItem('DARKMODE') == "ON");
+
+    if (DARKMODE){
+	content.classList.remove("darkMode");
+	localStorage.setItem('DARKMODE', "OFF");
+    } else {
+	content.classList.add("darkMode");
+	localStorage.setItem('DARKMODE', "ON");
+    }
+}
+
+// Compureba si está el DarkMode activo para ponerlo
+function check_darkMode(){
+    var content = document.body;
+    
+    if (localStorage.getItem('DARKMODE') == "ON"){
+	content.classList.add("darkMode");
+    } else {
+	content.classList.remove("darkMode");
+    }
+}
+
+// Cada vez que cambio de página compruebo si estaba el Dark Mode activo y
+// lo pongo en caso afirmativo
+check_darkMode()
+
+//----------------------- FUNCIONES ------------------------------
+
+//
+function borrar(id){
+    var url = "http://localhost:5000/api/movies/" + id;
+
+    var request = $.ajax({
+	    method: "DELETE",
+	    url: url
+    });
+
+    request.done(function( msg ) {
+	document.getElementById("result_busqueda").innerHTML="Película con IMDB: " + id +  " borrada con éxito";
+    });
+    
+    request.fail(function( jqXHR, textStatus ) {
+	alert( "Problema al borrar la película: " + textStatus );
+    });
+}
+
+
+
+// Main
+$(function () {
+
+    //Busca por título
+    $('#busca_titulo').keyup(function(){	
+	var url = "http://localhost:5000/apirest/movies?title=" + $(this).val();
+
+	var request = $.ajax({
+	    method: "GET",
+	    url: url
+	});
+
+	request.done(function( msg ) {
+	    var htmlString = `<div class="row">
+    <div class="col-sm">
+      <strong>Título</strong>
+    </div>
+    <div class="col-sm">
+      <strong>Año</strong>
+    </div>
+    <div class="col-sm">
+      <strong>IMDB</strong>
+    </div>
+    <div class="col-sm">
+      <strong>Tipo</strong>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>`;
+	    $.each(msg, function(i, v){
+		htmlString += `<div class="row">
+    <div class="col-sm">
+      ${v.title}
+    </div>
+    <div class="col-sm">
+      ${v.year}
+    </div>
+    <div class="col-sm">
+      ${v.imdb}
+    </div>
+    <div class="col-sm">
+      ${v.type}
+    </div>
+    <div class="col-sm">
+     <a class="btn btn-outline-success ml-5 my-2" onclick="borrar('${v.imdb}')">Borrar</a>
+    </div>
+  </div>`;
+	    })
+
+	    document.getElementById("result_busqueda").innerHTML=htmlString;
+	});
+	
+    }
+			    );
+
+
+    //Busca por año
+    $('#busca_year').keyup(function(){	
+	var url = "http://localhost:5000/apirest/movies?year=" + $(this).val();
+
+	var request = $.ajax({
+	    method: "GET",
+	    url: url
+	});
+
+	request.done(function( msg ) {
+	    var htmlString =  `<div class="row">
+    <div class="col-sm">
+      <strong>Título</strong>
+    </div>
+    <div class="col-sm">
+      <strong>Año</strong>
+    </div>
+    <div class="col-sm">
+      <strong>IMDB</strong>
+    </div>
+    <div class="col-sm">
+      <strong>Tipo</strong>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>`;
+	    $.each(msg, function(i, v){
+		htmlString += `<div class="row">
+    <div class="col-sm">
+      ${v.title}
+    </div>
+    <div class="col-sm">
+      ${v.year}
+    </div>
+    <div class="col-sm">
+      ${v.imdb}
+    </div>
+    <div class="col-sm">
+      ${v.type}
+    </div>
+    <div class="col-sm">
+     <a class="btn btn-outline-success ml-5 my-2" onclick="borrar('${v.imdb}')">Borrar</a>
+    </div>
+  </div>`;
+	    })
+
+	    document.getElementById("result_busqueda").innerHTML=htmlString;
+	});
+	
+    }
+			    );
+
+
+        //Busca por IMDB
+    $('#busca_imdb').keyup(function(){	
+	var url = "http://localhost:5000/apirest/movies?imdb=" + $(this).val();
+
+	var request = $.ajax({
+	    method: "GET",
+	    url: url
+	});
+
+	request.done(function( msg ) {
+	    var htmlString = `<div class="row">
+    <div class="col-sm">
+      <strong>Título</strong>
+    </div>
+    <div class="col-sm">
+      <strong>Año</strong>
+    </div>
+    <div class="col-sm">
+      <strong>IMDB</strong>
+    </div>
+    <div class="col-sm">
+      <strong>Tipo</strong>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>`;
+	    $.each(msg, function(i, v){
+		htmlString += `<div class="row">
+    <div class="col-sm">
+      ${v.title}
+    </div>
+    <div class="col-sm">
+      ${v.year}
+    </div>
+    <div class="col-sm">
+      ${v.imdb}
+    </div>
+    <div class="col-sm">
+      ${v.type}
+    </div>
+    <div class="col-sm">
+     <a class="btn btn-outline-success ml-5 my-2" onclick="borrar('${v.imdb}')">Borrar</a>
+    </div>
+  </div>`;
+	    })
+
+	    document.getElementById("result_busqueda").innerHTML=htmlString;
+	});
+	
+    }
+			  );
+
+        //Busca por tipo
+    $('#busca_tipo').keyup(function(){	
+	var url = "http://localhost:5000/apirest/movies?type=" + $(this).val();
+
+	var request = $.ajax({
+	    method: "GET",
+	    url: url
+	});
+
+	request.done(function( msg ) {
+	    var htmlString = `<div class="row">
+    <div class="col-sm">
+      <strong>Título</strong>
+    </div>
+    <div class="col-sm">
+      <strong>Año</strong>
+    </div>
+    <div class="col-sm">
+      <strong>IMDB</strong>
+    </div>
+    <div class="col-sm">
+      <strong>Tipo</strong>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>`;
+	    $.each(msg, function(i, v){
+		htmlString += `<div class="row">
+    <div class="col-sm">
+      ${v.title}
+    </div>
+    <div class="col-sm">
+      ${v.year}
+    </div>
+    <div class="col-sm">
+      ${v.imdb}
+    </div>
+    <div class="col-sm">
+      ${v.type}
+    </div>
+    <div class="col-sm">
+     <a class="btn btn-outline-success ml-5 my-2" onclick="borrar('${v.imdb}')">Borrar</a>
+    </div>
+  </div>`;
+	    })
+
+	    document.getElementById("result_busqueda").innerHTML=htmlString;
+	});
+	
+    }
+			    );
+    
+});
+

@@ -1,0 +1,17 @@
+{% extends "p4.html" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block busqueda %}
+<div id="grafica1" style="width:100%; height:400px;"></div>
+{% endblock %}
+
+{% block insertar %}
+{% endblock %}
+
+{% block modificar %}
+{% endblock %}
+
+{% block lista %}
+{% endblock %}
