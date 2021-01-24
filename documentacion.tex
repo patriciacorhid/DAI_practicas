@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage[left=1.8cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page
+% settings
+\usepackage{multicol} 
+\usepackage{amsmath} % provides many mathematical environments & tools
+\usepackage{dsfont}
+\usepackage{upgreek}
+\usepackage[spanish]{babel}
+\usepackage[doument]{ragged2e}
+
+% Images
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure} % subfiguras
+\usepackage{caption}
+\captionsetup[table]{labelformat=empty}
+\captionsetup[figure]{labelformat=empty}
+
+% Code
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{pgfplots}
+\usepackage{color}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\newcommand{\n}[1]{{\color{gray}#1}}
+\lstset{numbers=left,numberstyle=\small\color{gray}}
+
+\usepackage[bookmarks=true,
+            bookmarksnumbered=false, % true means bookmarks in 
+                                     % left window are numbered
+            bookmarksopen=false,     % true means only level 1
+                                     % are displayed.
+            colorlinks=true,
+            allcolors=blue,
+            urlcolor=cyan]{hyperref}
+
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc}
+\setlength{\parindent}{0mm}
+
+\begin{document}
+
+\title{Práctica 10}
+\author{Patricia Córdoba Hidalgo}
+\date{}
+\maketitle
+
+\section{Objetivos}
+
+\section{Alternativas}
+
+\section{Problemas y sus soluciones}
+
+Para calcular el año máximo y mínimo usamos la función sort como nos indica la documentación:
+https://docs.mongodb.com/manual/reference/method/cursor.sort/
+
+La línea de código de la función gráficas:
+max_year = db.video_movies.find().sort({'year':-1})[0]['year']
+
+producía el siguiente error:
+if no direction is specified, key_or_list must be an instance of list
+
+Tras consultar el siguiente enlace:
+https://stackoverflow.com/questions/10242149/using-sort-with-pymongo
+
+descubrimos que la manera correcta es:
+max_year = db.video_movies.find().sort([('year',-1)])[0]['year']
+
+\section{Proceso}
+
+(No he programado nada aún)
+
+Añadimos esta línea en la cabecera del html base:
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+Para crear el gráfico, seguir los pasos de:
+https://www.highcharts.com/docs/getting-started/your-first-chart
+
+Para modificar gráfico:
+https://www.highcharts.com/docs/getting-started/how-to-set-options
+https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/setoptions
+
+--------------------------------
+
+Añadimos esta línea en la cabecera de p4.html:
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+Creamos graficas.html con el div con id=grafica1
+
+
+
+\end{document}
