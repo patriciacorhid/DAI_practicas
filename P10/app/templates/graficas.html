@@ -6,7 +6,11 @@
 {% block busqueda %}
 <div class="col-md-10 col-lg-10 mt-2" id="grafica1" style="width:100%; height:600px;"></div>
 
+<div class="col-md-10 col-lg-10 mt-5" id="grafica2" style="width:100%; height:600px;"></div>
+
 <script>
+
+  // GRÁFICA 1
   document.addEventListener('DOMContentLoaded', function () {
       const chart = Highcharts.chart('grafica1', {
           chart: {
@@ -26,6 +30,49 @@
           series: [{
 	      name: 'Total de peliculas de la década',
               data: {{ v_pelis_decada }}
+          }]
+      });
+  });
+
+  // GRÁFICA 2
+  document.addEventListener('DOMContentLoaded', function () {
+      const chart = Highcharts.chart('grafica2', {
+          chart: {
+	      type: 'pie'
+          },
+	  plotOptions: {
+	      pie: {
+		  dataLabels: {
+		      enabled: true,
+		      distance: -50,
+		      style: {
+			  fontWeight: 'bold',
+			  color: 'white'
+		      }
+		  },
+		  startAngle: -90,
+		  endAngle: 90,
+		  center: ['50%', '75%'],
+		  size: '110%'
+	      }
+	  },
+          title: {
+              text: 'Películas de la mejor década'
+          },
+          series: [{
+	      name: 'Total películas',
+              data: [{name:{{ decada_oro[0] }}, y:{{ pelis_decada_oro[0] }}},
+		     {name:{{ decada_oro[1] }}, y:{{ pelis_decada_oro[1] }}},
+		     {name:{{ decada_oro[2] }}, y:{{ pelis_decada_oro[2] }}},
+		     {name:{{ decada_oro[3] }}, y:{{ pelis_decada_oro[3] }}},
+		     {name:{{ decada_oro[4] }}, y:{{ pelis_decada_oro[4] }}},
+		     {name:{{ decada_oro[5] }}, y:{{ pelis_decada_oro[5] }}},
+		     {name:{{ decada_oro[6] }}, y:{{ pelis_decada_oro[6] }}},
+		     {name:{{ decada_oro[7] }}, y:{{ pelis_decada_oro[7] }}},
+		     {name:{{ decada_oro[8] }}, y:{{ pelis_decada_oro[8] }}},
+		     {name:{{ decada_oro[9] }}, y:{{ pelis_decada_oro[9] }}},
+		    ],
+	      innerSize: '25%',
           }]
       });
   });

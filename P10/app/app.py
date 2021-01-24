@@ -516,6 +516,8 @@ def recomendadas():
 @app.route('/graficas')
 def graficas():
 
+    # -----------------GRAFICA 1 ------------------
+
     # Calculamos el año máximo y mínimo de las películas
     max_year = db.video_movies.find().sort([('year',-1)])[0]['year']
     min_year = db.video_movies.find().sort([('year', 1)])[0]['year']
@@ -538,4 +540,20 @@ def graficas():
             pelis_decada.append(suma)
             suma = 0
 
-    return render_template('graficas.html', v_decadas = decadas, v_pelis_decada = pelis_decada)
+    # -----------------GRAFICA 2 ------------------
+
+    decada_oro = pelis_decada.index(max(pelis_decada))*10 + ini # década con más películas
+    anios = [] # años que conforman dicha década
+    pelis_decada_oro = [] # películas estrenadas dicha década
+
+    # rellenamos el vector de años que conforman la década
+    for i in range(decada_oro, decada_oro + 10):
+        anios.append(i)
+
+    # rellenamos el vector de películas de cada año de la década de oro
+    for y in range(decada_oro, decada_oro + 10):
+        suma += db.video_movies.find({"year": int(y)}).count()
+        pelis_decada_oro.append(suma)
+        suma = 0
+    
+    return render_template('graficas.html', v_decadas = decadas, v_pelis_decada = pelis_decada, decada_oro = anios, pelis_decada_oro = pelis_decada_oro)

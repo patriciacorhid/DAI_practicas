@@ -50,6 +50,43 @@
 
 \section{Objetivos}
 
+Mi objetivo en esta práctica es añadir las siguientes funcionalidades a la página creada en la Práctica 5:
+\begin{itemize}
+\item Añadir una cartelera con una serie de películas recomendadas, a la que se accederá mediante el botón \texttt{Peliculas recomendadas} situado en la barra de navegación.
+\item Añadir gráficas utilizando Highcharts. Podemos visualizarlas pulsando en la sección \texttt{Estadísticas} de la barra de navegación.
+\end{itemize}
+
+\section{Desarrollo}
+
+\subsection{Cartelera}
+
+El fichero \texttt{html} donde se despliega esta funcionalidad es \textit{recomendadas.html}, que extiende del fichero \textit{p4.html}, el fichero base. Este fichero contiene en el bloque \textit{lista} el código para crear una sección donde se encontrará tanto la imagen de una de las películas recomendadas como dos enlaces a cada lado de esta imagen, uno a su izquierda para ver al poster de la película anterior y otro a su derecha para ver el de la siguiente.\\
+
+La imagen por defecto incluida en esta sección es el poster de la película \textit{West Side Story}, y se cambiará al pulsar los enlaces de \texttt{Previa} y \texttt{Siguiente}. Los códigos de las funciones que se ejecutan al pulsar en dichos enlaces, \texttt{prev()} y \texttt{next()}, se encuentran en el fichero \textit{src.js}, en la carpeta \textit{static}.\\
+
+Para que se ejecuten las funciones definidas en el fichero \textit{src.js} hay que incluir la siguiente línea en \textit{p4.html}:
+\begin{center}
+  \texttt{<script src=``{{url\_for('static', filename='src.js')}}''></script>}
+\end{center}
+
+En este fichero, tras el código para cambiar al modo nocturno, programé las funciones que permiten deslizar las imágenes de la cartelera. Primero declaré el vector \texttt{images}, que contiene la dirección donde se encuentran los pósters de todas las películas que forman la cartelera, y la variable \texttt{num}, que señala cual de las imágenes del vector se está mostrando en ese momento. Las funciones \texttt{prev()} y \texttt{next()} actualizan el valor de \texttt{num}, decrementando e incrementando su valor módulo \texttt{images.length} respectivamente, para que se muestre la imagen del vector \texttt{images} situada en esa posición.
+
+\subsection{Gráficas}
+
+Primero instalamos Highcharts añadiendo en la cabecera de \textit{p4.html} la línea:
+\vspace{-1mm}
+\begin{center}
+  \texttt{<script src=``https://code.highcharts.com/highcharts.js''></script>}
+\end{center}
+
+como indica en \href{https://www.highcharts.com/docs/getting-started/installation}{la documentación}.\\
+
+En el fichero \textit{graficas.html} creamos las secciones que albergarán los dos gráficos de la página e introducimos el código de éstas. Estas gráficas las implementé inspirándome en los códigos que aparecen en \href{https://www.highcharts.com/docs/getting-started/your-first-chart}{https://www.highcharts.com/docs/\\getting-started/your-first-chart} y en \href{https://www.highcharts.com/demo/pie-semi-circle}{https://www.highcharts.com/demo/pie-semi-circle}.\\
+
+Al final del fichero \textit{src.js} está el código donde se declara el estilo de las gráficas. En los enlaces \href{https://www.highcharts.com/docs/getting-started/how-to-set-options}{https://www.highcharts.com/\\docs/getting-started/how-to-set-options} encontramos un ejemplo del uso de \texttt{setOptions}, el método que utilicé para especificar el estilo de mis gráficas.
+
+La información que se representa en las gráficas se recopila en la función \texttt{graficas()} del fichero \textit{app.py}, la última función definida en este fichero.
+
 \section{Alternativas}
 
 \section{Problemas y sus soluciones}
@@ -69,26 +106,7 @@ https://stackoverflow.com/questions/10242149/using-sort-with-pymongo
 descubrimos que la manera correcta es:
 max_year = db.video_movies.find().sort([('year',-1)])[0]['year']
 
-\section{Proceso}
 
-(No he programado nada aún)
-
-Añadimos esta línea en la cabecera del html base:
-<script src="https://code.highcharts.com/highcharts.js"></script>
-
-Para crear el gráfico, seguir los pasos de:
-https://www.highcharts.com/docs/getting-started/your-first-chart
-
-Para modificar gráfico:
-https://www.highcharts.com/docs/getting-started/how-to-set-options
-https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/setoptions
-
---------------------------------
-
-Añadimos esta línea en la cabecera de p4.html:
-<script src="https://code.highcharts.com/highcharts.js"></script>
-
-Creamos graficas.html con el div con id=grafica1
 
 
 
