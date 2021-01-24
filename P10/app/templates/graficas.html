@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block busqueda %}
-<div id="grafica1" style="width:90%; height:400px;"></div>
-<!--
+<div class="col-md-10 col-lg-10 mt-2" id="grafica1" style="width:100%; height:600px;"></div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
       const chart = Highcharts.chart('grafica1', {
@@ -30,33 +30,6 @@
       });
   });
 </script>
--->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-      const chart = Highcharts.chart('grafica1', {
-          chart: {
-              type: 'bar'
-          },
-          title: {
-              text: 'Pokemons de cada tipo'
-          },
-          xAxis: {
-              categories: {{ v_decadas }}
-          },
-          yAxis: {
-              title: {
-                  text: 'Número de Pokemon'
-              }
-          },
-          series: [{
-	      name: "patata",
-              data: {{ v_pelis_decada }}
-          }]
-      });
-  });  
-</script>
-{{ v_pelis_decada }}
-{{ v_decadas }}
 {% endblock %}
 
 {% block insertar %}

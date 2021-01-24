@@ -528,11 +528,11 @@ def graficas():
     ini = min_year - (min_year%10)
     fin = max_year - (max_year%10)
 
-    for i in range(ini, fin+1, 10):
+    for i in range(ini, fin+10, 10):
         decadas.append(i)
 
     # rellenamos el vector de películas por década
-    for y in range(min_year, max_year+1):
+    for y in range(min_year, max_year+10):
         suma += db.video_movies.find({"year": int(y)}).count()
         if (y%10 == 0):
             pelis_decada.append(suma)

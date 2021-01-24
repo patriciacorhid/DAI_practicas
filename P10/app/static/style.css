@@ -40,3 +40,13 @@ code {
 .dropdown-menu {
   background-color: #299bb9; 
 }
+
+.darkMode {
+    background-color: #000024;
+    color: white;
+}
+
+#boton {
+    background-color: #000024;
+    color: white;
+}
