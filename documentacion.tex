@@ -60,6 +60,7 @@ Mi objetivo en esta práctica es añadir las siguientes funcionalidades:
 \begin{itemize}
 \item Añadir una cartelera con una serie de películas recomendadas, a la que se accederá mediante el botón \texttt{Peliculas recomendadas} situado en la barra de navegación.
 \item Añadir gráficas utilizando Highcharts. Podemos visualizarlas pulsando en la sección \texttt{Estadísticas} de la barra de navegación.
+\item Añadir un mapa con la localización del ``videoclub''. Pulsando \texttt{Donde encontrarnos} en la barra de navvegación, accedemos a dicho mapa. Elegí como localización la biblioteca de la Facultad de Ciencias.
 \end{itemize}
 
 \section{Desarrollo}
@@ -75,7 +76,9 @@ Para que se ejecuten las funciones definidas en el fichero \textit{src.js} hay q
   \texttt{<script src=``{{url\_for('static', filename='src.js')}}''></script>}
 \end{center}
 
-En este fichero, tras el código para cambiar al modo nocturno, programé las funciones que permiten deslizar las imágenes de la cartelera. Primero declaré el vector \texttt{images}, que contiene la dirección donde se encuentran los pósters de todas las películas que forman la cartelera, y la variable \texttt{num}, que señala cual de las imágenes del vector se está mostrando en ese momento. Las funciones \texttt{prev()} y \texttt{next()} actualizan el valor de \texttt{num}, decrementando e incrementando su valor módulo \texttt{images.length} respectivamente, para que se muestre la imagen del vector \texttt{images} situada en esa posición.
+En este fichero, tras el código para cambiar al modo nocturno, programé las funciones que permiten deslizar las imágenes de la cartelera. Primero declaré el vector \texttt{images}, que contiene la dirección donde se encuentran los pósters de todas las películas que forman la cartelera, y la variable \texttt{pos}, que señala cual de las imágenes del vector se está mostrando en ese momento. Las funciones \texttt{prev()} y \texttt{next()} actualizan el valor de \texttt{pos}, decrementando e incrementando su valor módulo \texttt{images.length} respectivamente, para que se muestre la imagen del vector \texttt{images} situada en esa posición.\\
+
+Esta funcionalidad está basada en una sección ``Creando un deslizador de imágenes'' del tutorial de JavaScript de la aplicación SoloLearn. 
 
 \subsection{Gráficas}
 
@@ -98,6 +101,19 @@ Al final del fichero \textit{src.js} está el código donde se declara el estilo
 La información que se representa en las gráficas se recopila en la función \texttt{graficas()} del fichero \textit{app.py}, la última función definida en este fichero. Los datos que necesitamos para representar la primera gráfica son el vector con las décadas en las que se estrenaron las películas de nuestra base de datos (\texttt{decadas}) y el número de películas estrenadas en cada década (\texttt{pelis\_decada}). El primer vector conforma el eje vertical de la gráfica y el segundo especifica la longitud de cada una de las barras.\\
 
 Los datos que necesitamos para visualizar la segunda gráfica es el vector con los años que componen la década con más películas estrenadas (\texttt{anios}) y el total de películas de cada uno de estos años (\texttt{pelis\_decada\_oro}). El primer vector guarda las etiquetas de los sectores circulares y el segundo se usará para concretar su área.\\
+
+\subsection{Mapa}
+
+Esta funcionalidad está implementada en el fichero \textit{mapa.html}. Esta implementación la llevé a cabo siguiendo los pasos que encontramos en la página \href{https://cutt.ly/Vj12SUe}{https://cutt.ly/Vj12SUe}. Estos pasos son:
+
+\begin{enumerate}
+\item Buscar la dirección deseada en la página \href{https://www.openstreetmap.org}{https://www.openstreetmap.org}.
+\item Pulsar el botón de compartir.
+\item Marcar la casilla \texttt{Incluir marcador}.
+\item Copiar el código \texttt{HTML} en el fichero \textit{mapa.html}.
+\end{enumerate}
+
+Otra opción para hacer esto hubiese sido seguir los pasos que aparecen en \href{https://evilnapsis.com/2020/08/03/introduccion-a-openstreetmaps-crear-mapa-web-y-agregar-marcadores/}{https://evilnapsis.com/2020/08/03/introduccion-a-openstreetmaps-crear-mapa-web-y-agregar-marcadores/}.
 
 \section{Problemas y sus soluciones}
 
