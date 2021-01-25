@@ -512,6 +512,11 @@ api.add_resource(Movies2, "/apirest/movies/<id>")
 def recomendadas():
     return render_template('recomendadas.html')
 
+# Mostramos el mapa
+@app.route('/mapa')
+def mapa():
+    return render_template('mapa.html')
+
 # Mostramos gráficas
 @app.route('/graficas')
 def graficas():

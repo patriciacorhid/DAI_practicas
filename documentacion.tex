@@ -43,14 +43,20 @@
 
 \begin{document}
 
-\title{Práctica 10}
-\author{Patricia Córdoba Hidalgo}
+\title{\Huge Práctica 10}
+\author{\LARGE Patricia Córdoba Hidalgo \vspace{2mm}\\
+  \Large patriciacorhid@correo.ugr.es \vspace{2mm}\\
+  \Large Grupo de prácticas del  martes \vspace{5mm}}
 \date{}
 \maketitle
 
+\section{Introducción}
+
+Realicé esta práctica sobre la práctica 5 (que a su vez se implementó sobre la práctica 4), por lo que se accede a la página principal mediante la url \texttt{localhost:5000/mongo} y el fichero \texttt{html} del que heredan el resto es \textit{p4.html}. Añadí el modo nocturno implementado en la práctica 8.
+
 \section{Objetivos}
 
-Mi objetivo en esta práctica es añadir las siguientes funcionalidades a la página creada en la Práctica 5:
+Mi objetivo en esta práctica es añadir las siguientes funcionalidades:
 \begin{itemize}
 \item Añadir una cartelera con una serie de películas recomendadas, a la que se accederá mediante el botón \texttt{Peliculas recomendadas} situado en la barra de navegación.
 \item Añadir gráficas utilizando Highcharts. Podemos visualizarlas pulsando en la sección \texttt{Estadísticas} de la barra de navegación.
@@ -92,8 +98,6 @@ Al final del fichero \textit{src.js} está el código donde se declara el estilo
 La información que se representa en las gráficas se recopila en la función \texttt{graficas()} del fichero \textit{app.py}, la última función definida en este fichero. Los datos que necesitamos para representar la primera gráfica son el vector con las décadas en las que se estrenaron las películas de nuestra base de datos (\texttt{decadas}) y el número de películas estrenadas en cada década (\texttt{pelis\_decada}). El primer vector conforma el eje vertical de la gráfica y el segundo especifica la longitud de cada una de las barras.\\
 
 Los datos que necesitamos para visualizar la segunda gráfica es el vector con los años que componen la década con más películas estrenadas (\texttt{anios}) y el total de películas de cada uno de estos años (\texttt{pelis\_decada\_oro}). El primer vector guarda las etiquetas de los sectores circulares y el segundo se usará para concretar su área.\\
-
-\section{Alternativas}
 
 \section{Problemas y sus soluciones}
 
