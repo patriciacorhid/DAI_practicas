@@ -81,33 +81,36 @@ Primero instalamos Highcharts añadiendo en la cabecera de \textit{p4.html} la l
 
 como indica en \href{https://www.highcharts.com/docs/getting-started/installation}{la documentación}.\\
 
-En el fichero \textit{graficas.html} creamos las secciones que albergarán los dos gráficos de la página e introducimos el código de éstas. Estas gráficas las implementé inspirándome en los códigos que aparecen en \href{https://www.highcharts.com/docs/getting-started/your-first-chart}{https://www.highcharts.com/docs/\\getting-started/your-first-chart} y en \href{https://www.highcharts.com/demo/pie-semi-circle}{https://www.highcharts.com/demo/pie-semi-circle}.\\
+En el fichero \textit{graficas.html} creamos las secciones que albergarán los dos gráficos de la página e introducimos el código de éstas. El código de estar gráficas se ejecuta cuando el documento HTML ha sido completamente cargado y parseado.\\
 
-Al final del fichero \textit{src.js} está el código donde se declara el estilo de las gráficas. En los enlaces \href{https://www.highcharts.com/docs/getting-started/how-to-set-options}{https://www.highcharts.com/\\docs/getting-started/how-to-set-options} encontramos un ejemplo del uso de \texttt{setOptions}, el método que utilicé para especificar el estilo de mis gráficas.
+La primera gráfica la implementé basándome en el código que aparece en \href{https://www.highcharts.com/docs/getting-started/your-first-chart}{https://www.highcharts.com/docs/\\getting-started/your-first-chart}. Es un gráfico de barras que representa el número de películas de la base de datos que se estrenó en cada década.\\
 
-La información que se representa en las gráficas se recopila en la función \texttt{graficas()} del fichero \textit{app.py}, la última función definida en este fichero.
+La segunda gráfica representa el número de películas estrenadas en cada uno de los años que conforman la década con más películas. Este gráfico es un gráfico semicircular, cuya implementación está inspirada en el código que aparece en  \href{https://www.highcharts.com/demo/pie-semi-circle}{https://www.highcharts.com/demo/pie-semi-circle}.\\
+
+Al final del fichero \textit{src.js} está el código donde se declara el estilo de las gráficas. En el enlace \href{https://www.highcharts.com/docs/getting-started/how-to-set-options}{https://www.highcharts.com/\\docs/getting-started/how-to-set-options} encontramos un ejemplo del uso de \texttt{setOptions}, el método que utilicé para especificar el estilo de mis gráficas, en particular los colores usados, el .\\
+
+La información que se representa en las gráficas se recopila en la función \texttt{graficas()} del fichero \textit{app.py}, la última función definida en este fichero. Los datos que necesitamos para representar la primera gráfica son el vector con las décadas en las que se estrenaron las películas de nuestra base de datos (\texttt{decadas}) y el número de películas estrenadas en cada década (\texttt{pelis\_decada}). El primer vector conforma el eje vertical de la gráfica y el segundo especifica la longitud de cada una de las barras.\\
+
+Los datos que necesitamos para visualizar la segunda gráfica es el vector con los años que componen la década con más películas estrenadas (\texttt{anios}) y el total de películas de cada uno de estos años (\texttt{pelis\_decada\_oro}). El primer vector guarda las etiquetas de los sectores circulares y el segundo se usará para concretar su área.\\
 
 \section{Alternativas}
 
 \section{Problemas y sus soluciones}
 
-Para calcular el año máximo y mínimo usamos la función sort como nos indica la documentación:
-https://docs.mongodb.com/manual/reference/method/cursor.sort/
+Gracias a la claridad y los ejemplos de la documentación, no tuve apenas problemas durante el desarrollo de mi práctica. El único problema que tuve fue calculando el año máximo y mínimo en los uqe hay películas guardadas.
+Para calcular el año máximo y mínimo usé inicialmente la función sort como nos indica \href{https://docs.mongodb.com/manual/reference/method/cursor.sort/}{la documentación}:
 
-La línea de código de la función gráficas:
-max_year = db.video_movies.find().sort({'year':-1})[0]['year']
+\vspace{-1mm}
+\begin{center}
+  \texttt{max\_year = db.video\_movies.find().sort(\{'year':-1\})[0]['year']}
+\end{center}
 
-producía el siguiente error:
-if no direction is specified, key_or_list must be an instance of list
+Este código producía el siguiente error: \textit{if no direction is specified, key\_or\_list must be an instance of list}.
 
-Tras consultar el siguiente enlace:
-https://stackoverflow.com/questions/10242149/using-sort-with-pymongo
-
-descubrimos que la manera correcta es:
-max_year = db.video_movies.find().sort([('year',-1)])[0]['year']
-
-
-
-
+Busqué el error en internet y encontré el enlace \href{https://stackoverflow.com/questions/10242149/using-sort-with-pymongo}{https://stackoverflow.com/questions/10242149/using-sort-with-pymongo}, donde se explica que la manera correcta de usar \texttt{sort} es añadiéndole una lista como parámetro y no un diccionario, dado que el orden de los argumentos importa. Por tanto, la versión final del código es:
+\vspace{-1mm}
+\begin{center}
+  \texttt{max\_year = db.video\_movies.find().sort([('year',-1)])[0]['year']}
+\end{center}
 
 \end{document}
