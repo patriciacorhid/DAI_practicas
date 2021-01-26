@@ -104,7 +104,17 @@ Los datos que necesitamos para visualizar la segunda gráfica es el vector con l
 
 \subsection{Mapa}
 
-Esta funcionalidad está implementada en el fichero \textit{mapa.html}. Esta implementación la llevé a cabo siguiendo los pasos que encontramos en la página \href{https://cutt.ly/Vj12SUe}{https://cutt.ly/Vj12SUe}. Estos pasos son:
+El código de funcionalidad se encuentra en el fichero \textit{scr.js}. Encontramos en la página \href{https://evilnapsis.com/2020/08/03/introduccion-a-openstreetmaps-crear-mapa-web-y-agregar-marcadores/}{https://evilnapsis.com/2020/08/03/\\introduccion-a-openstreetmaps-crear-mapa-web-y-agregar-marcadores/} una introducción a OpenStreetMap y cómo crear un mapa usando la librería \textit{OpenLayers}.\\
+
+Descargué la librería en la carpeta \textit{static} y añadí la siguiente línea de código al fichero \textit{p4.html} para incluir el script de \textit{OpenLayers}:
+\vspace{-1mm}
+\begin{center}
+  \texttt{<script src=``{{url\_for('static', filename='/OpenLayers/lib/OpenLayers.js')}}'' ></script>}
+\end{center}
+
+En el fichero \textit{mapa.html} creamos una sección donde añadiremos el mapa, usando el código que se aparece en el fichero \textit{scr.js}.\\
+
+También se podría haber usado la librería \textit{Leaflet} para implementar esta funcionalidad. Si solo queremas añadir un marcador, la manera más sencilla es seguir los pasos que encontramos en la página \href{https://cutt.ly/Vj12SUe}{https://cutt.ly/Vj12SUe}. Estos pasos son:
 
 \begin{enumerate}
 \item Buscar la dirección deseada en la página \href{https://www.openstreetmap.org}{https://www.openstreetmap.org}.
@@ -112,8 +122,6 @@ Esta funcionalidad está implementada en el fichero \textit{mapa.html}. Esta imp
 \item Marcar la casilla \texttt{Incluir marcador}.
 \item Copiar el código \texttt{HTML} en el fichero \textit{mapa.html}.
 \end{enumerate}
-
-Otra opción para hacer esto hubiese sido seguir los pasos que aparecen en \href{https://evilnapsis.com/2020/08/03/introduccion-a-openstreetmaps-crear-mapa-web-y-agregar-marcadores/}{https://evilnapsis.com/2020/08/03/introduccion-a-openstreetmaps-crear-mapa-web-y-agregar-marcadores/}.
 
 \section{Problemas y sus soluciones}
 
